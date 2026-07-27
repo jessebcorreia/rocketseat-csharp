@@ -1,0 +1,30 @@
+# Build
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+
+# Rider
+.idea/
+
+# Logs
+*.log
+
+# Arquivos temporários
+*.tmp
+*.temp
+
+# Configurações locais com segredos
+appsettings.Development.json
+appsettings.Local.json
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
