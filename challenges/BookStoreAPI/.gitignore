@@ -1,0 +1,43 @@
+# Build
+bin/
+obj/
+
+# Visual Studio
+.vs/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / JetBrains (caso use)
+.idea/
+
+# Logs
+*.log
+
+# Test results
+TestResults/
+*.trx
+
+# NuGet
+*.nupkg
+packages/
+
+# Publish outputs
+publish/
+*.pubxml
+*.publishproj
+
+# Generated files
+Generated/
+*.generated.cs
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment/config local
+.env
+appsettings.Development.json
