@@ -8,7 +8,7 @@ public class RegisterExpenseUseCase
 {
     public ResponseRegisterExpenseJson Execute(RequestRegisterExpenseJson request)
     {
-        Validate(request)
+        Validate(request);
         return new ResponseRegisterExpenseJson();
     }
 
