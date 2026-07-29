@@ -13,23 +13,9 @@ public class ExpensesController : ControllerBase
     [ProducesResponseType(typeof(ResponseRegisterExpenseJson), StatusCodes.Status201Created)]
     public IActionResult Register([FromBody] RequestRegisterExpenseJson request)
     {
-        try
-        {
-            var useCase = new RegisterExpenseUseCase();
-            var response = useCase.Execute(request);
-            return Created(string.Empty, response);
-        }
-        catch (ArgumentException ex)
-        {
-            var errorResponse = new ResponseErrorJson(ex.Message);
+        var useCase = new RegisterExpenseUseCase();
+        var response = useCase.Execute(request);
 
-            return BadRequest(errorResponse);
-        }
-        catch
-        {
-            var errorResponse = new ResponseErrorJson("Internal server error.");
-
-            return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
-        }
+        return Created(string.Empty, response);
     }
 }
