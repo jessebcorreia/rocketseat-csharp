@@ -61,6 +61,15 @@ namespace CashFlow.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value must be greater than zero.
+        /// </summary>
+        public static string AMOUNT_MUST_BE_GREATHER_THAN_ZERO {
+            get {
+                return ResourceManager.GetString("AMOUNT_MUST_BE_GREATHER_THAN_ZERO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The expense date cannot be in the future.
         /// </summary>
         public static string EXPANSE_CANNOT_BE_IN_THE_FUTURE {
@@ -93,15 +102,6 @@ namespace CashFlow.Exception {
         public static string UNKNOWN_ERROR {
             get {
                 return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The value must be greater than zero.
-        /// </summary>
-        public static string VALUE_MUST_BE_GREATHER_THAN_ZERO {
-            get {
-                return ResourceManager.GetString("VALUE_MUST_BE_GREATHER_THAN_ZERO", resourceCulture);
             }
         }
     }

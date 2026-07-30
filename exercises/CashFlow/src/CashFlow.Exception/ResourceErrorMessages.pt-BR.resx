@@ -120,7 +120,7 @@
   <data name="TITLE_REQUIRED" xml:space="preserve">
     <value>O título é obrigatório</value>
   </data>
-  <data name="VALUE_MUST_BE_GREATHER_THAN_ZERO" xml:space="preserve">
+  <data name="AMOUNT_MUST_BE_GREATHER_THAN_ZERO" xml:space="preserve">
     <value>O valor deve ser maior que zero</value>
   </data>
   <data name="EXPANSE_CANNOT_BE_IN_THE_FUTURE" xml:space="preserve">
