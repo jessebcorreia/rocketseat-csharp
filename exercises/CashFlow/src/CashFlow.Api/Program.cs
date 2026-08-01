@@ -1,5 +1,7 @@
 using CashFlow.Api.Filters;
 using CashFlow.Api.Middleware;
+using CashFlow.Application;
+using CashFlow.Infrastructure;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,13 +11,15 @@ builder.Services.AddOpenApi();
 builder.Services.AddRouting(option => option.LowercaseUrls = true);
 builder.Services.AddMvc(options => options.Filters.Add<ExceptionFilter>());
 
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.MapScalarApiReference();
-
 }
 
 app.UseMiddleware<CultureMiddleware>();
