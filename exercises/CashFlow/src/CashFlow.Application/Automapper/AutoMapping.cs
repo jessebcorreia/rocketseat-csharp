@@ -22,5 +22,6 @@ public class AutoMapping : Profile
     {
         CreateMap<Expense, ResponseRegisterExpenseJson>();
         CreateMap<Expense, ResponseExpenseSummaryJson>();
+        CreateMap<Expense, ResponseExpenseJson>();
     }
 }

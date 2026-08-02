@@ -24,7 +24,7 @@ public class ExpensesController : ControllerBase
     [HttpGet]
     [ProducesResponseType(typeof(ResponseExpensesJson), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAllExpenses([FromServices] IGetAllExpensesUseCase useCase)
+    public async Task<IActionResult> GetAll([FromServices] IGetAllExpensesUseCase useCase)
     {
         var response = await useCase.Execute();
 
@@ -35,5 +35,17 @@ public class ExpensesController : ControllerBase
 
 
         return NoContent();
+    }
+
+    [HttpGet("{id}")]
+    [ProducesResponseType(typeof(ResponseExpensesJson), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetById(
+        [FromServices] IGetExpenseByIdUseCase useCase,
+        [FromRoute] long id)
+    {
+        var response = await useCase.Execute(id);
+
+        return Ok(response);
     }
 }
