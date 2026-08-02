@@ -54,7 +54,7 @@ public class RegisterExpenseValidatorTests
 
         // Assert
         result.IsValid.ShouldBeFalse();
-        result.Errors.ShouldHaveSingleItem().ErrorMessage.ShouldBe(ResourceErrorMessages.EXPANSE_CANNOT_BE_IN_THE_FUTURE);
+        result.Errors.ShouldHaveSingleItem().ErrorMessage.ShouldBe(ResourceErrorMessages.EXPENSE_CANNOT_BE_IN_THE_FUTURE);
     }
 
     [Fact]

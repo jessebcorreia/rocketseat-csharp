@@ -72,9 +72,9 @@ namespace CashFlow.Exception {
         /// <summary>
         ///   Looks up a localized string similar to The expense date cannot be in the future.
         /// </summary>
-        public static string EXPANSE_CANNOT_BE_IN_THE_FUTURE {
+        public static string EXPENSE_CANNOT_BE_IN_THE_FUTURE {
             get {
-                return ResourceManager.GetString("EXPANSE_CANNOT_BE_IN_THE_FUTURE", resourceCulture);
+                return ResourceManager.GetString("EXPENSE_CANNOT_BE_IN_THE_FUTURE", resourceCulture);
             }
         }
         

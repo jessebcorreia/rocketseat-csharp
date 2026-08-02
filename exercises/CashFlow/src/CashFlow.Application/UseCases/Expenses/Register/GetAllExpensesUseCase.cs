@@ -1,0 +1,28 @@
+﻿using AutoMapper;
+using CashFlow.Communication.Responses;
+using CashFlow.Domain.Repositories.Expenses;
+
+namespace CashFlow.Application.UseCases.Expenses.Register;
+
+public class GetAllExpensesUseCase : IGetAllExpensesUseCase
+{
+    private readonly IExpensesRepository _repository;
+    private readonly IMapper _mapper;
+    public GetAllExpensesUseCase(IExpensesRepository repository, IMapper mapper)
+    {
+        _repository = repository;
+        _mapper = mapper;
+    }
+
+    public async Task<ResponseExpensesJson> Execute()
+    {
+        var result = await _repository.GetAll();
+
+        var response = new ResponseExpensesJson
+        {
+            Expenses = _mapper.Map<List<ResponseExpenseSummaryJson>>(result)
+        };
+
+        return response;
+    }
+}

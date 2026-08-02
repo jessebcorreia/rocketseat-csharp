@@ -123,7 +123,7 @@
   <data name="AMOUNT_MUST_BE_GREATHER_THAN_ZERO" xml:space="preserve">
     <value>O valor deve ser maior que zero</value>
   </data>
-  <data name="EXPANSE_CANNOT_BE_IN_THE_FUTURE" xml:space="preserve">
+  <data name="EXPENSE_CANNOT_BE_IN_THE_FUTURE" xml:space="preserve">
     <value>A data da despesa não pode estar no futuro</value>
   </data>
   <data name="INVALID_PAYMENT_TYPE" xml:space="preserve">
