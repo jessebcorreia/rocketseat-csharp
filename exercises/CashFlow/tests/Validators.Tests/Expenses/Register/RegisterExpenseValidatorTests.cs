@@ -6,13 +6,13 @@ using Shouldly;
 
 namespace Validators.Tests.Expenses.Register;
 
-public class RegisterExpenseValidatorTests
+public class ExpenseValidatorTests
 {
     [Fact]
     public void Success()
     {
         // Arrange
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var request = RequestExpenseJsonBuilder.Build();
 
         // Act
@@ -29,7 +29,7 @@ public class RegisterExpenseValidatorTests
     public void ErrorTitleEmpty(string? title)
     {
         // Arrange
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var request = RequestExpenseJsonBuilder.Build();
         request.Title = title!;
 
@@ -45,7 +45,7 @@ public class RegisterExpenseValidatorTests
     public void ErrorFutureDate()
     {
         // Arrange
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var request = RequestExpenseJsonBuilder.Build();
         request.Date = DateTime.Now.AddDays(1);
 
@@ -61,7 +61,7 @@ public class RegisterExpenseValidatorTests
     public void ErrorInvalidPaymentType()
     {
         // Arrange
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var request = RequestExpenseJsonBuilder.Build();
         request.PaymentType = (PaymentType)700;
 
@@ -79,7 +79,7 @@ public class RegisterExpenseValidatorTests
     public void ErrorInvalidAmount(decimal amount)
     {
         // Arrange
-        var validator = new RegisterExpenseValidator();
+        var validator = new ExpenseValidator();
         var request = RequestExpenseJsonBuilder.Build();
         request.Amount = amount;
 

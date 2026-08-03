@@ -60,4 +60,18 @@ public class ExpensesController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Update(
+        [FromServices] IUpdateExpenseUseCase useCase,
+        [FromRoute] long id,
+        [FromBody] RequestExpenseJson request)
+    {
+        await useCase.Execute(id, request);
+
+        return NoContent();
+    }
 }
