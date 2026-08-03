@@ -4,12 +4,12 @@ using CashFlow.Communication.Requests;
 
 namespace CommonTestUtilities.Requests;
 
-public class RequestRegisterExpenseJsonBuilder
+public class RequestExpenseJsonBuilder
 {
-    public static RequestRegisterExpenseJson Build()
+    public static RequestExpenseJson Build()
     {
         // Precisei tipar o Faker explicitamente porque o IntelliSense não estava inferindo corretamente o tipo da lambda (aparentemente é um bug no visual studio)
-        return new Faker<RequestRegisterExpenseJson>()
+        return new Faker<RequestExpenseJson>()
             .RuleFor(r => r.Title, (Bogus.Faker f) => f.Commerce.ProductName())
             .RuleFor(r => r.Description, (Bogus.Faker f) => f.Commerce.ProductDescription())
             .RuleFor(r => r.Date, (Bogus.Faker f) => f.Date.Past())
