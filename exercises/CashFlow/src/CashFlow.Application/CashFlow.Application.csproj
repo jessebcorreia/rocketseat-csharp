@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="..\..\..\..\..\..\..\Downloads\Raleway,Work_Sans\Raleway-Black.ttf" Link="UseCases\Reports\Pdf\Fonts\Raleway-Black.ttf" />
+    <EmbeddedResource Include="..\..\..\..\..\..\..\Downloads\Raleway,Work_Sans\Raleway-Regular.ttf" Link="UseCases\Reports\Pdf\Fonts\Raleway-Regular.ttf" />
+    <EmbeddedResource Include="..\..\..\..\..\..\..\Downloads\Raleway,Work_Sans\WorkSans-Black.ttf" Link="UseCases\Reports\Pdf\Fonts\WorkSans-Black.ttf" />
+    <EmbeddedResource Include="..\..\..\..\..\..\..\Downloads\Raleway,Work_Sans\WorkSans-Regular.ttf" Link="UseCases\Reports\Pdf\Fonts\WorkSans-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CashFlow.Communication\CashFlow.Communication.csproj" />
     <ProjectReference Include="..\CashFlow.Domain\CashFlow.Domain.csproj" />
     <ProjectReference Include="..\CashFlow.Exception\CashFlow.Exception.csproj" />
@@ -17,6 +24,7 @@
     <PackageReference Include="ClosedXML" Version="0.105.1" />
     <PackageReference Include="FluentValidation" Version="12.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.18" />
+    <PackageReference Include="PDFsharp-MigraDoc" Version="6.2.4" />
   </ItemGroup>
 
 </Project>
