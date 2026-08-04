@@ -1,4 +1,4 @@
-﻿namespace CashFlow.Application.UseCases.Expenses.Register;
+﻿namespace CashFlow.Application.UseCases.Expenses.Delete;
 
 public interface IDeleteExpenseUseCase
 {

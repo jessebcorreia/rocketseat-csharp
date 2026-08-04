@@ -6,12 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="..\..\..\..\..\..\..\Downloads\Raleway,Work_Sans\Raleway-Black.ttf" Link="UseCases\Reports\Pdf\Fonts\Raleway-Black.ttf" />
-    <EmbeddedResource Include="..\..\..\..\..\..\..\Downloads\Raleway,Work_Sans\Raleway-Regular.ttf" Link="UseCases\Reports\Pdf\Fonts\Raleway-Regular.ttf" />
-    <EmbeddedResource Include="..\..\..\..\..\..\..\Downloads\Raleway,Work_Sans\WorkSans-Black.ttf" Link="UseCases\Reports\Pdf\Fonts\WorkSans-Black.ttf" />
-    <EmbeddedResource Include="..\..\..\..\..\..\..\Downloads\Raleway,Work_Sans\WorkSans-Regular.ttf" Link="UseCases\Reports\Pdf\Fonts\WorkSans-Regular.ttf" />
-  </ItemGroup>
+<ItemGroup>
+  <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\Raleway-Black.ttf" />
+  <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\Raleway-Regular.ttf" />
+  <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\WorkSans-Black.ttf" />
+  <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\WorkSans-Regular.ttf" />
+</ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CashFlow.Communication\CashFlow.Communication.csproj" />

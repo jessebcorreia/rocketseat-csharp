@@ -4,7 +4,7 @@ using CashFlow.Domain.Enums;
 using CashFlow.Domain.Repositories.Expenses;
 using ClosedXML.Excel;
 
-namespace CashFlow.Application.UseCases.Reports.Excel;
+namespace CashFlow.Application.UseCases.Expenses.Reports.Excel;
 
 public class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUseCase
 {
