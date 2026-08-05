@@ -1,6 +1,6 @@
 ﻿using CashFlow.Domain;
 using CashFlow.Domain.Entities;
-using CashFlow.Domain.Enums;
+using CashFlow.Domain.Extensions;
 using CashFlow.Domain.Repositories.Expenses;
 using ClosedXML.Excel;
 
@@ -40,18 +40,6 @@ public class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUs
         return file.ToArray();
     }
 
-    private string ToDisplayString(PaymentType paymentType)
-    {
-        return paymentType switch
-        {
-            PaymentType.ElectronicTransfer => ResourceReportGeneratorMessages.PAYMENT_TYPE_ELECTRONIC_TRANSFER,
-            PaymentType.CreditCard => ResourceReportGeneratorMessages.PAYMENT_TYPE_CREDIT_CARD,
-            PaymentType.DebitCard => ResourceReportGeneratorMessages.PAYMENT_TYPE_DEBIT_CARD,
-            PaymentType.Cash => ResourceReportGeneratorMessages.PAYMENT_TYPE_CASH,
-            _ => string.Empty,
-        };
-    }
-
     private void InsertHeader(IXLWorksheet worksheet)
     {
         worksheet.Cell("A1").Value = ResourceReportGeneratorMessages.TITLE;
@@ -79,7 +67,7 @@ public class GenerateExpensesReportExcelUseCase : IGenerateExpensesReportExcelUs
             worksheet.Cell($"B{raw}").Value = expense.Description;
             worksheet.Cell($"C{raw}").Value = expense.Date;
             worksheet.Cell($"D{raw}").Value = expense.Amount;
-            worksheet.Cell($"E{raw}").Value = ToDisplayString(expense.PaymentType);
+            worksheet.Cell($"E{raw}").Value = expense.PaymentType.PaymentTypeToString();
             raw++;
         }
 

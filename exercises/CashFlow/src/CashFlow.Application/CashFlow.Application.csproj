@@ -6,12 +6,18 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-<ItemGroup>
-  <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\Raleway-Black.ttf" />
-  <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\Raleway-Regular.ttf" />
-  <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\WorkSans-Black.ttf" />
-  <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\WorkSans-Regular.ttf" />
-</ItemGroup>
+  <ItemGroup>
+	<Content Include="Logo\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\Raleway-Black.ttf" />
+    <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\Raleway-Regular.ttf" />
+    <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\WorkSans-Black.ttf" />
+    <EmbeddedResource Include="UseCases\Expenses\Reports\Pdf\Fonts\WorkSans-Regular.ttf" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CashFlow.Communication\CashFlow.Communication.csproj" />
@@ -25,6 +31,10 @@
     <PackageReference Include="FluentValidation" Version="12.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.18" />
     <PackageReference Include="PDFsharp-MigraDoc" Version="6.2.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logo\" />
   </ItemGroup>
 
 </Project>
