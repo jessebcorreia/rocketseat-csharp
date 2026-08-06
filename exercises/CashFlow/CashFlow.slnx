@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/scripts/">
+    <File Path="scripts/create-migration.ps1" />
+    <File Path="scripts/update-database.ps1" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/CashFlow.Api/CashFlow.Api.csproj" />
     <Project Path="src/CashFlow.Application/CashFlow.Application.csproj" />
