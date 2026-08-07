@@ -1,9 +1,10 @@
 using CashFlow.Communication.Enums;
 
-namespace CashFlow.Communication.Requests;
+namespace CashFlow.Communication.Responses.Expenses;
 
-public class RequestExpenseJson
+public class ResponseExpenseJson
 {
+    public long Id { get; set; }
     public string Title { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public DateTime Date { get; set; }
