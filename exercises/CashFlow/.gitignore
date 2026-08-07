@@ -21,10 +21,6 @@ obj/
 *.tmp
 *.temp
 
-# Configurações locais com segredos
-appsettings.Development.json
-appsettings.Local.json
-
 # Sistema operacional
 .DS_Store
 Thumbs.db
