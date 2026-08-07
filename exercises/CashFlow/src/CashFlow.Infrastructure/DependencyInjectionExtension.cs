@@ -1,5 +1,6 @@
 using CashFlow.Domain.Repositories;
 using CashFlow.Domain.Repositories.Expenses;
+using CashFlow.Domain.Security.Cryptography;
 using CashFlow.Infrastructure.DataAccess;
 using CashFlow.Infrastructure.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ public static class DependencyInjectionExtension
     {
         AddDbContext(services, configuration);
         AddRepositories(services);
+        AddSecurity(services);
     }
 
     private static void AddRepositories(IServiceCollection services)
@@ -31,5 +33,10 @@ public static class DependencyInjectionExtension
         var serverVersion = new MySqlServerVersion(version);
 
         services.AddDbContext<CashFlowDbContext>(config => config.UseMySql(connectionString, serverVersion));
+    }
+
+    private static void AddSecurity(IServiceCollection services)
+    {
+        services.AddScoped<IPasswordHasher, Infrastructure.Security.BCrypt>();
     }
 }
