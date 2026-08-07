@@ -139,12 +139,15 @@
     <value>The user name is required</value>
   </data>
   <data name="EMPTY_EMAIL" xml:space="preserve">
-    <value>The e-mail is required</value>
+    <value>The email is required</value>
   </data>
   <data name="INVALID_EMAIL" xml:space="preserve">
     <value>The e-mail is not valid</value>
   </data>
   <data name="INVALID_PASSWORD" xml:space="preserve">
     <value>Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.</value>
+  </data>
+  <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
+    <value>This email is already registered</value>
   </data>
 </root>
