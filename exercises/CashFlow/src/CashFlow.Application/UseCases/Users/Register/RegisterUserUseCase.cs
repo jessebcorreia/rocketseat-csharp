@@ -2,6 +2,7 @@ using AutoMapper;
 using CashFlow.Communication.Requests.Users;
 using CashFlow.Communication.Responses.Users;
 using CashFlow.Domain.Entities;
+using CashFlow.Domain.Repositories;
 using CashFlow.Domain.Repositories.Users;
 using CashFlow.Domain.Security.Cryptography;
 using CashFlow.Exception;
@@ -14,13 +15,22 @@ public class RegisterUserUseCase : IRegisterUserUseCase
 {
     private readonly IMapper _mapper;
     private readonly IPasswordHasher _passwordHasher;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly IUsersReadOnlyRepository _userReadOnlyRepository;
+    private readonly IUsersWriteOnlyRepository _userWriteOnlyRepository;
 
-    public RegisterUserUseCase(IMapper mapper, IPasswordHasher passwordHasher, IUsersReadOnlyRepository userReadOnlyRepository)
+    public RegisterUserUseCase(
+        IUnitOfWork unitOfWork,
+        IUsersReadOnlyRepository userReadOnlyRepository,
+        IUsersWriteOnlyRepository userWriteOnlyRepository,
+        IMapper mapper,
+        IPasswordHasher passwordHasher)
     {
+        _unitOfWork = unitOfWork;
+        _userWriteOnlyRepository = userWriteOnlyRepository;
+        _userReadOnlyRepository = userReadOnlyRepository;
         _mapper = mapper;
         _passwordHasher = passwordHasher;
-        _userReadOnlyRepository = userReadOnlyRepository;
     }
 
     public async Task<ResponseRegisterUserJson> Execute(RequestRegisterUserJson request)
@@ -28,8 +38,12 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         await Validate(request);
 
         var user = _mapper.Map<User>(request); // password ficou fora do automapper
-
         user.Password = _passwordHasher.Hash(request.Password);
+        user.UserIdentifier = Guid.NewGuid();
+
+        await _userWriteOnlyRepository.Add(user);
+
+        await _unitOfWork.Commit();
 
         return new ResponseRegisterUserJson
         {
