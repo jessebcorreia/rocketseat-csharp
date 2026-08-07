@@ -28,3 +28,7 @@ appsettings.Local.json
 # Sistema operacional
 .DS_Store
 Thumbs.db
+
+# Keys
+private-key.*
+public-key.*
