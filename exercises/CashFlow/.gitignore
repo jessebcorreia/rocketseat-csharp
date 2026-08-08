@@ -28,3 +28,4 @@ Thumbs.db
 # Keys
 private-key.*
 public-key.*
+signing-key.*

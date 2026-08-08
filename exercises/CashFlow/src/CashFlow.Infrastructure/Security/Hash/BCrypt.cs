@@ -1,9 +1,9 @@
 using CashFlow.Domain.Security.Cryptography;
 using BC = BCrypt.Net.BCrypt;
 
-namespace CashFlow.Infrastructure.Security;
+namespace CashFlow.Infrastructure.Security.Hash;
 
-public class BCrypt : IPasswordHasher
+internal class BCrypt : IPasswordHasher
 {
     public string Hash(string password)
     {
