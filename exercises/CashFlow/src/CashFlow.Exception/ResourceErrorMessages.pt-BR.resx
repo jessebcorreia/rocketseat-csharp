@@ -150,4 +150,7 @@
   <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
     <value>Este e-mail já está cadastrado</value>
   </data>
+  <data name="INVALID_LOGIN_CREDENTIALS" xml:space="preserve">
+    <value>E-mail ou senha inválidos</value>
+  </data>
 </root>

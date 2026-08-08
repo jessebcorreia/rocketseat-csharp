@@ -1,7 +1,8 @@
 <Solution>
   <Folder Name="/scripts/">
     <File Path="scripts/create-migration.ps1" />
-    <File Path="scripts/generate-jwt-keys.ps1" />
+    <File Path="scripts/generate-jwt-hs256-signing-key.ps1" />
+    <File Path="scripts/generate-jwt-rs256-keys.ps1" />
     <File Path="scripts/update-database.ps1" />
   </Folder>
   <Folder Name="/src/">

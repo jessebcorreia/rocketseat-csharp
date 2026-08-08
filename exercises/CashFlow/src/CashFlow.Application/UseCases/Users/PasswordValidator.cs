@@ -17,38 +17,42 @@ public partial class PasswordValidator<T> : PropertyValidator<T, string>
 
     public override bool IsValid(ValidationContext<T> context, string password)
     {
-        var errorMessage = ValidatePassword(password);
+        var errors = ValidatePassword(password);
 
-        if (errorMessage is not null)
+        if (errors.Count > 0)
         {
-            context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, errorMessage);
+            context.MessageFormatter.AppendArgument(
+                ERROR_MESSAGE_KEY,
+                string.Join(Environment.NewLine, errors));
             return false;
         }
 
         return true;
     }
 
-    private static string? ValidatePassword(string password)
+    private static List<string> ValidatePassword(string password)
     {
+        var errors = new List<string>();
+
         if (string.IsNullOrWhiteSpace(password))
-            return "Password is required.";
+            errors.Add("Password is required.");
 
         if (password.Length < 8)
-            return "Password must be at least 8 characters long.";
+            errors.Add("Password must be at least 8 characters long.");
 
         if (!UppercaseLetter().IsMatch(password))
-            return "Password must contain at least one uppercase letter.";
+            errors.Add("Password must contain at least one uppercase letter.");
 
         if (!LowercaseLetter().IsMatch(password))
-            return "Password must contain at least one lowercase letter.";
+            errors.Add("Password must contain at least one lowercase letter.");
 
         if (!Number().IsMatch(password))
-            return "Password must contain at least one number.";
+            errors.Add("Password must contain at least one number.");
 
         if (!SpecialCharacter().IsMatch(password))
-            return "Password must contain at least one special character.";
+            errors.Add("Password must contain at least one special character.");
 
-        return null;
+        return errors;
     }
 
     [GeneratedRegex(@"[A-Z]")]

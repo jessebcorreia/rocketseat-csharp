@@ -124,6 +124,15 @@ namespace CashFlow.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid email or password.
+        /// </summary>
+        public static string INVALID_LOGIN_CREDENTIALS {
+            get {
+                return ResourceManager.GetString("INVALID_LOGIN_CREDENTIALS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character..
         /// </summary>
         public static string INVALID_PASSWORD {

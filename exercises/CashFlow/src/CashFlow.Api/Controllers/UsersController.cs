@@ -11,7 +11,7 @@ namespace CashFlow.Api.Controllers;
 public class UsersController : ControllerBase
 {
     [HttpPost]
-    [ProducesResponseType(typeof(ResponseRegisterUserJson), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register(
         [FromServices] IRegisterUserUseCase useCase,
