@@ -26,7 +26,7 @@ public class ExpenseValidatorTests
     [InlineData("")]
     [InlineData("      ")]
     [InlineData(null)]
-    public void ErrorTitleEmpty(string? title)
+    public void ErrorEmptyTitle(string? title)
     {
         // Arrange
         var validator = new ExpenseValidator();

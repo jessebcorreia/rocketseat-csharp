@@ -1,3 +1,4 @@
+using CashFlow.Exception;
 using FluentValidation;
 using FluentValidation.Validators;
 using System.Text.RegularExpressions;
@@ -17,42 +18,26 @@ public partial class PasswordValidator<T> : PropertyValidator<T, string>
 
     public override bool IsValid(ValidationContext<T> context, string password)
     {
-        var errors = ValidatePassword(password);
+        var isValid = ValidatePassword(password);
 
-        if (errors.Count > 0)
+        if (isValid == false)
         {
-            context.MessageFormatter.AppendArgument(
-                ERROR_MESSAGE_KEY,
-                string.Join(Environment.NewLine, errors));
+            context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, ResourceErrorMessages.INVALID_PASSWORD);
             return false;
         }
 
         return true;
     }
 
-    private static List<string> ValidatePassword(string password)
+    private static bool ValidatePassword(string password)
     {
-        var errors = new List<string>();
-
-        if (string.IsNullOrWhiteSpace(password))
-            errors.Add("Password is required.");
-
-        if (password.Length < 8)
-            errors.Add("Password must be at least 8 characters long.");
-
-        if (!UppercaseLetter().IsMatch(password))
-            errors.Add("Password must contain at least one uppercase letter.");
-
-        if (!LowercaseLetter().IsMatch(password))
-            errors.Add("Password must contain at least one lowercase letter.");
-
-        if (!Number().IsMatch(password))
-            errors.Add("Password must contain at least one number.");
-
-        if (!SpecialCharacter().IsMatch(password))
-            errors.Add("Password must contain at least one special character.");
-
-        return errors;
+        return
+            string.IsNullOrWhiteSpace(password) is not true &&
+            password.Length >= 8 &&
+            UppercaseLetter().IsMatch(password) &&
+            LowercaseLetter().IsMatch(password) &&
+            Number().IsMatch(password) &&
+            SpecialCharacter().IsMatch(password);
     }
 
     [GeneratedRegex(@"[A-Z]")]
