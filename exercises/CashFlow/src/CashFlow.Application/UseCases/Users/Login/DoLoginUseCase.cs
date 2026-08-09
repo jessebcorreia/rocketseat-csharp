@@ -1,4 +1,3 @@
-using AutoMapper;
 using CashFlow.Communication.Requests.Users;
 using CashFlow.Communication.Responses.Users;
 using CashFlow.Domain.Repositories.Users;
@@ -15,7 +14,7 @@ public class DoLoginUseCase : IDoLoginUseCase
     private readonly IAccessTokenGenerator _accesTokenGenerator;
 
 
-    public DoLoginUseCase(IUsersReadOnlyRepository repository, IMapper mapper, IPasswordHasher passwordHasher, IAccessTokenGenerator accesTokenGenerator)
+    public DoLoginUseCase(IUsersReadOnlyRepository repository, IPasswordHasher passwordHasher, IAccessTokenGenerator accesTokenGenerator)
     {
         _repository = repository;
         _passwordHasher = passwordHasher;
