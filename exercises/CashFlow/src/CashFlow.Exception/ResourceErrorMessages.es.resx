@@ -118,39 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="TITLE_REQUIRED" xml:space="preserve">
-    <value>The title is required</value>
+    <value>El título es obligatorio</value>
   </data>
   <data name="AMOUNT_MUST_BE_GREATER_THAN_ZERO" xml:space="preserve">
-    <value>The value must be greater than zero</value>
+    <value>El valor debe ser mayor que cero</value>
   </data>
   <data name="EXPENSE_CANNOT_BE_IN_THE_FUTURE" xml:space="preserve">
-    <value>The expense date cannot be in the future</value>
+    <value>La fecha del gasto no puede estar en el futuro</value>
   </data>
   <data name="INVALID_PAYMENT_TYPE" xml:space="preserve">
-    <value>The payment type is not valid</value>
+    <value>El tipo de pago no es válido</value>
   </data>
   <data name="UNKNOWN_ERROR" xml:space="preserve">
-    <value>Unknown error</value>
+    <value>Error desconocido</value>
   </data>
   <data name="EXPENSE_NOT_FOUND" xml:space="preserve">
-    <value>The expense was not found</value>
+    <value>No se encontró el gasto</value>
   </data>
   <data name="EMPTY_NAME" xml:space="preserve">
-    <value>The user name is required</value>
+    <value>El nombre de usuario es obligatorio</value>
   </data>
   <data name="EMPTY_EMAIL" xml:space="preserve">
-    <value>The email is required</value>
+    <value>El correo electrónico del usuario es obligatorio</value>
   </data>
   <data name="INVALID_EMAIL" xml:space="preserve">
-    <value>The e-mail is not valid</value>
+    <value>El correo electrónico no es válido</value>
   </data>
   <data name="INVALID_PASSWORD" xml:space="preserve">
-    <value>Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.</value>
+    <value>La contraseña debe tener al menos 8 caracteres y contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial (por ejemplo: !, ?, )</value>
   </data>
   <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
-    <value>This email is already registered</value>
+    <value>Este correo electrónico ya está registrado</value>
   </data>
   <data name="INVALID_LOGIN_CREDENTIALS" xml:space="preserve">
-    <value>Invalid email or password</value>
+    <value>Correo electrónico o contraseña inválidos</value>
   </data>
 </root>
