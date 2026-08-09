@@ -1,5 +1,7 @@
 using CashFlow.Application.UseCases.Users.Login;
 using CashFlow.Domain.Entities;
+using CashFlow.Exception;
+using CashFlow.Exception.ExceptionsBase;
 using CommonTestUtilities.Cryptography;
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
@@ -16,8 +18,9 @@ public class DoLoginUseCaseTest
     {
         var user = UserBuilder.Build();
         var request = RequestLoginJsonBuilder.Build();
+        request.Email = user.Email;
 
-        var useCase = CreateDoLoginUseCase(user);
+        var useCase = CreateDoLoginUseCase(user, request.Password);
 
         var result = await useCase.Execute(request);
 
@@ -29,18 +32,39 @@ public class DoLoginUseCaseTest
     [Fact]
     public async Task ErrorUserNotFound()
     {
+        var user = UserBuilder.Build();
+        var request = RequestLoginJsonBuilder.Build();
 
+        var useCase = CreateDoLoginUseCase(user, request.Password);
+
+        var act = async () => await useCase.Execute(request);
+
+        var thrownException = await act.ShouldThrowAsync<InvalidLoginException>();
+
+        thrownException.GetErrors().Count.ShouldBe(1);
+        thrownException.GetErrors().ShouldContain(ResourceErrorMessages.INVALID_LOGIN_CREDENTIALS);
     }
 
     [Fact]
     public async Task ErrorPasswordDoesNotMatch()
     {
+        var user = UserBuilder.Build();
+        var request = RequestLoginJsonBuilder.Build();
+        request.Email = user.Email;
 
+        var useCase = CreateDoLoginUseCase(user);
+
+        var act = async () => await useCase.Execute(request);
+
+        var thrownException = await act.ShouldThrowAsync<InvalidLoginException>();
+
+        thrownException.GetErrors().Count.ShouldBe(1);
+        thrownException.GetErrors().ShouldContain(ResourceErrorMessages.INVALID_LOGIN_CREDENTIALS);
     }
 
-    private static DoLoginUseCase CreateDoLoginUseCase(User user)
+    private static DoLoginUseCase CreateDoLoginUseCase(User user, string? password = null)
     {
-        var passwordHasher = PasswordHasherBuilder.Build();
+        var passwordHasher = new PasswordHasherBuilder().Verify(password).Build();
         var jwtTokenGenerator = JwtTokenGeneratorBuilder.Build();
         var usersReadOnlyRepository = new UsersReadOnlyRepositoryBuilder().GetUserByEmail(user).Build();
 

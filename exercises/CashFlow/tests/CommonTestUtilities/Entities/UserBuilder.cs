@@ -8,7 +8,7 @@ public class UserBuilder
 {
     public static User Build()
     {
-        var passwordHasher = PasswordHasherBuilder.Build();
+        var passwordHasher = new PasswordHasherBuilder().Build();
 
         return new Faker<User>()
             .RuleFor(user => user.Id, _ => 1)
