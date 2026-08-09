@@ -14,6 +14,7 @@
     <Project Path="src/CashFlow.Infrastructure/CashFlow.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="src/WebApi.Tests/WebApi.Tests.csproj" Id="ebe72126-3bdd-48ca-af9d-8e1f120e2911" />
     <Project Path="tests/CommonTestUtilities/CommonTestUtilities.csproj" Id="c5818dfa-8f07-4979-ae86-83dfdd999563" />
     <Project Path="tests/UseCases.Tests/UseCases.Tests.csproj" Id="1e8aa2c2-4e31-4d3a-a9d6-d54ed9e9ba08" />
     <Project Path="tests/Validators.Tests/Validators.Tests.csproj" Id="354d571d-716c-4456-ae7b-e3c399a7ea7d" />
