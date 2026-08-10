@@ -1,97 +1,20 @@
-using CashFlow.Api.Filters;
-using CashFlow.Api.Middleware;
-using CashFlow.Api.Token;
+using CashFlow.Api.Extensions;
 using CashFlow.Application;
-using CashFlow.Domain.Security.Tokens;
 using CashFlow.Infrastructure;
-using CashFlow.Infrastructure.Extensions;
-using CashFlow.Infrastructure.Migrations;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.OpenApi;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Scalar.AspNetCore;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-
-builder.Services.AddOpenApi(options =>
-{
-    ConfigureOpenApi(options);
-});
-
-builder.Services.AddRouting(option => option.LowercaseUrls = true);
-builder.Services.AddMvc(options => options.Filters.Add<ExceptionFilter>());
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApi(builder.Configuration);
 builder.Services.AddApplication();
-
-builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
-builder.Services.AddHttpContextAccessor();
-
-AddAuthentication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.MapScalarApiReference();
-}
+app.ConfigureMiddleware();
+app.ConfigureEndpoints();
 
-app.UseMiddleware<CultureMiddleware>();
-app.UseHttpsRedirection();
-app.UseAuthentication();
-app.UseAuthorization();
-app.MapControllers();
-
-if (builder.Configuration.IsTestEnvironment() == false)
-    await MigrateDatabase();
+await app.MigrateDatabase();
 
 app.Run();
-
-async Task MigrateDatabase()
-{
-    await using var scope = app.Services.CreateAsyncScope();
-    await DatabaseMigration.MigrateDatabase(scope.ServiceProvider);
-}
-
-void AddAuthentication()
-{
-    var signingKey = builder.Configuration.GetValue<string>("Settings:Jwt:SigningKey");
-    builder.Services.AddAuthentication(config =>
-    {
-        config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    }).AddJwtBearer(config =>
-    {
-        config.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            ClockSkew = new TimeSpan(0),
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey!))
-        };
-    });
-}
-
-void ConfigureOpenApi(OpenApiOptions options)
-{
-    options.AddDocumentTransformer((document, context, cancellationToken) =>
-    {
-        document.Components ??= new();
-        document.Components.SecuritySchemes ??= new Dictionary<string, OpenApiSecurityScheme>();
-
-        document.Components.SecuritySchemes["Bearer"] = new OpenApiSecurityScheme
-        {
-            Type = SecuritySchemeType.Http,
-            Scheme = "bearer",
-            BearerFormat = "JWT"
-        };
-
-        return Task.CompletedTask;
-    });
-}
 
 public partial class Program { }
