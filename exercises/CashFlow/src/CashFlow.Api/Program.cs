@@ -1,6 +1,8 @@
 using CashFlow.Api.Filters;
 using CashFlow.Api.Middleware;
+using CashFlow.Api.Token;
 using CashFlow.Application;
+using CashFlow.Domain.Security.Tokens;
 using CashFlow.Infrastructure;
 using CashFlow.Infrastructure.Extensions;
 using CashFlow.Infrastructure.Migrations;
@@ -22,9 +24,11 @@ builder.Services.AddOpenApi(options =>
 
 builder.Services.AddRouting(option => option.LowercaseUrls = true);
 builder.Services.AddMvc(options => options.Filters.Add<ExceptionFilter>());
-
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+
+builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
+builder.Services.AddHttpContextAccessor();
 
 AddAuthentication();
 
