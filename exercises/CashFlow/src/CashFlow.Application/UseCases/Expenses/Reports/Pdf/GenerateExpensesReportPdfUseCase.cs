@@ -4,6 +4,8 @@ using CashFlow.Domain;
 using CashFlow.Domain.Entities;
 using CashFlow.Domain.Extensions;
 using CashFlow.Domain.Repositories.Expenses;
+using CashFlow.Domain.Services.LoggedUser;
+
 // using DocumentFormat.OpenXml.Spreadsheet;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Tables;
@@ -15,27 +17,31 @@ namespace CashFlow.Application.UseCases.Expenses.Reports.Pdf;
 
 public class GenerateExpensesReportPdfUseCase : IGenerateExpensesReportPdfUseCase
 {
-    private readonly IExpensesReadOnlyRepository _repository;
     private const int ROW_HEIGHT_EXPENSE_TABLE = 25;
 
+    private readonly IExpensesReadOnlyRepository _repository;
+    private readonly ILoggedUser _loggedUser;
 
-    public GenerateExpensesReportPdfUseCase(IExpensesReadOnlyRepository repository)
+    public GenerateExpensesReportPdfUseCase(IExpensesReadOnlyRepository repository, ILoggedUser loggedUser)
     {
         _repository = repository;
+        _loggedUser = loggedUser;
 
         GlobalFontSettings.FontResolver = new ExpensesReportFontResolver();
     }
 
     public async Task<byte[]> Execute(DateOnly month)
     {
-        var expenses = await _repository.FilterByMonth(month);
+        var user = await _loggedUser.Get();
+        var expenses = await _repository.FilterByMonth(month, user.Id);
+
         if (expenses.Count == 0)
         {
             return [];
         }
 
         var totalExpenses = expenses.Sum(expenses => expenses.Amount);
-        var document = CreateDocument(month);
+        var document = CreateDocument(user.Name, month);
         var page = CreatePage(document);
 
         CreateHeaderWithLogoAndTitle(page);
@@ -49,9 +55,10 @@ public class GenerateExpensesReportPdfUseCase : IGenerateExpensesReportPdfUseCas
         return RenderDocument(document);
     }
 
-    private Document CreateDocument(DateOnly month)
+    private Document CreateDocument(string author, DateOnly month)
     {
         var document = new Document();
+        document.Info.Author = author;
         document.Info.Title = $"ResourceReportGeneratorMessages.EXPENSES_FOR {month:Y}";
 
         var style = document.Styles["Normal"];
@@ -103,7 +110,7 @@ public class GenerateExpensesReportPdfUseCase : IGenerateExpensesReportPdfUseCas
 
         paragraph.AddFormattedText(title, new Font { Name = FontHelper.RALEWAY_REGULAR, Size = 15 });
         paragraph.AddLineBreak();
-        paragraph.AddFormattedText($"R$ {totalExpenses}", new Font { Name = FontHelper.WORKSANS_BLACK, Size = 50 });
+        paragraph.AddFormattedText($"R$ {totalExpenses:f2}", new Font { Name = FontHelper.WORKSANS_BLACK, Size = 50 });
     }
 
     private Table CreateExpenseTable(Section page, Expense expense)
@@ -169,7 +176,7 @@ public class GenerateExpensesReportPdfUseCase : IGenerateExpensesReportPdfUseCas
 
     private void AddAmountForExpense(Cell cell, decimal amount)
     {
-        cell.AddParagraph($"-{amount}");
+        cell.AddParagraph($"-{amount:f2}");
         cell.Format.Font = new Font { Name = FontHelper.WORKSANS_REGULAR, Size = 14, Color = ColorsHelper.BLACK };
         cell.Shading.Color = ColorsHelper.WHITE;
         cell.VerticalAlignment = VerticalAlignment.Center;
